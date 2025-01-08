@@ -1,0 +1,8 @@
+Key Notes:
+
+    pvcreate: Creates a physical volume from a block device.
+    vgcreate: Creates a volume group from one or more physical volumes.
+    lvcreate: Creates a logical volume within a volume group.
+    lvextend: Expands the size of an existing logical volume.
+    resize2fs: Resizes the filesystem on a logical volume to utilize the extended space.
+    lvremove: Removes a logical volume (be cautious, as this deletes all data on the LV).
