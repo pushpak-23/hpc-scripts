@@ -44,15 +44,16 @@ sudo cp -arfv slurm.conf.example slurm.conf
 
 sed -i -e "s/^ClusterName.*/ClusterName=cluster/" \
        -e "s/^SlurmctldHost.*/SlurmctldHost=${m_host}/" \
-       -e '1s/^/AuthType=auth\/munge\n/'\
+       -e '1s/^/AuthType=auth\/munge\n/' \
        -e "s/^ProctrackType.*/ProctrackType=proctrack\/linuxproc/" \
        -e "s/^AccountingStorageType.*/AccountingStorageType=accounting_storage\/slurmdbd/" \
        -e "s/^SlurmUser.*/SlurmUser=${username}/" \
        -e "s/^NodeName.*/NodeName=${m_host} CPUs=4 State=UNKNOWN/" \
-       -e "s/^NodeName.*/NodeName=${c_host1} CPUs=4 State=UNKNOWN/" \
-       -e "s/^NodeName.*/NodeName=${c_host2} CPUs=4 State=UNKNOWN/" \
+       -e "/^NodeName.*${m_host}/a NodeName=${c_host1} CPUs=4 State=UNKNOWN" \
+       -e "/^NodeName.*${m_host}/a NodeName=${c_host2} CPUs=4 State=UNKNOWN" \
        -e "s/^PartitionName.*/PartitionName=newpartition Nodes=ALL Default=YES MaxTime=INFINITE State=UP/" \
        -e "s/^MailProg.*/MailProg=\/usr\/bin\/mail/" slurm.conf
+
 
 sudo cp -arfv slurm.conf /etc/slurm-llnl/
 sudo cp -arfv slurm.conf /etc/slurm/
