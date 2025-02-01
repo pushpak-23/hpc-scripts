@@ -85,10 +85,15 @@ sudo chown ${username}:${username} /var/spool/slurmctld
 sudo chmod 700 /var/spool/slurmctld/
 
 # Step 9: Export necessary environment variables
-echo "export LD_LIBRARY_PATH=/home/${username}/slurm-21.08.8/lib" >> ~/.bashrc
-echo "export PATH=\$PATH:/home/${username}/slurm-21.08.8/sbin:/home/${username}/slurm-21.08.8/bin" >> ~/.bashrc
-source ~/.bashrc
+export LD_LIBRARY_PATH="/home/ubuntu/slurm-21.08.8/lib:$LD_LIBRARY_PATH"
+export PATH="/home/ubuntu/slurm-21.08.8/sbin/:$PATH"
+export PATH="/home/ubuntu/slurm-21.08.8/bin/:$PATH"
 
+# Add these exports to bashrc for persistence
+echo 'export LD_LIBRARY_PATH="/home/ubuntu/slurm-21.08.8/lib:$LD_LIBRARY_PATH"' >> ~/.bashrc
+echo 'export PATH="/home/ubuntu/slurm-21.08.8/sbin/:$PATH"' >> ~/.bashrc
+echo 'export PATH="/home/ubuntu/slurm-21.08.8/bin/:$PATH"' >> ~/.bashrc
+source ~/.bashrc
 
 
 # Step 10: Deploy configuration files to compute nodes
