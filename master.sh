@@ -76,7 +76,8 @@ sudo sed -i "s/^bind-address.*/bind-address = ${m_ip}/" /etc/mysql/mariadb.conf.
 sudo systemctl restart mariadb
 sudo systemctl enable mariadb
 
-sudo mysql -u root --password="password" -e "CREATE USER 'ubuntu'@'localhost' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'localhost'; FLUSH PRIVILEGES;"
+command="CREATE USER '${username}'@'localhost' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON *.* TO '${username}'@'localhost'; FLUSH PRIVILEGES;"
+sudo mysql -u root --password="password" -e "$command"
 
 # Step 8: Set up required directories and permissions
 sudo mkdir -p /var/spool/slurmctld
